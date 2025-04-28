@@ -56,6 +56,8 @@ public class AlienInvasionView extends JFrame
 		JPanel game = new JPanel();
 		Player player = new Player("Paul");
 		game.add(player);
+		SpaceShip alien1 = new SpaceShip();
+		game.add(alien1);
 		this.add(game, BorderLayout.CENTER);
 		
 		//Ignore this for now. I was just playing around with buttons
@@ -70,7 +72,8 @@ public class AlienInvasionView extends JFrame
 		
 		//Score panel
 		JPanel scorePanel = new JPanel();
-		JLabel scoreLabel = new JLabel("Score: ");
+		Score score = new Score();
+		JLabel scoreLabel = new JLabel(score.toString());
 		scorePanel.add(scoreLabel);
 		this.add(scorePanel, BorderLayout.EAST);
 		

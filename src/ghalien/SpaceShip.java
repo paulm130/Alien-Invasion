@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Grace Ho; student ID
-* @author Full name; student ID
+* @author Paul Montal; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -19,8 +19,13 @@
 */
 package ghalien;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 /**
  * Purpose: The reponsibility of SpaceShip is ...
@@ -28,14 +33,32 @@ import javax.swing.JButton;
  * SpaceShip is-a ...
  * SpaceShip is ...
  */
-public class SpaceShip extends JButton implements Moveable
+public class SpaceShip extends JComponent implements Moveable
 {
 	private int x;
 	private int y; 
 	private ImageIcon shipIcon = new ImageIcon("tempspaceship.jpg", "space ship");
 	public SpaceShip()
 	{
-		setIcon(shipIcon);
+		setPreferredSize(new Dimension(100, 100));
+	}
+	
+	/** 
+	 * I still have to figure this out it shouldn't be hard
+	 * @return the x(horizontal) position of the Player
+	 */
+	public int getXPosition()
+	{
+		return 0;
+	}
+	
+	/** 
+	 * I still have to figure this out it shouldn't be hard
+	 * @return the y(vertical) position of the Player
+	 */
+	public int getYPosition()
+	{
+		return 0;
 	}
 	
 	/**
@@ -68,6 +91,17 @@ public class SpaceShip extends JButton implements Moveable
 	public void moveDown()
 	{
 		setLocation(x, y - 10);
+	}
+	
+	/**
+	 * Purpose: generates the SpaceShip using shipIcon. 
+	 * I am still trying to figure out how to get it to work here is a youtube video. 
+	 * https://www.youtube.com/watch?v=dFOIoX3fXpQ
+	 */
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		g.drawImage(shipIcon.getImage(), 0,0, 100, 100, this);
 	}
 
 }
