@@ -49,5 +49,6 @@ class TestAlienInvasion
 		assertEquals(score.getScore(), 1);
 		assertEquals(score.toString(), "Score: 1");
 	}
-
+	
+	//more tests will be added soon
 }

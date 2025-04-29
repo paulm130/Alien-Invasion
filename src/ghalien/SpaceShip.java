@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Grace Ho; student ID
-* @author Paul Montal; student ID
+* @author Full name; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -15,17 +15,16 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-21
+* Version: 2025-04-28
 */
 package ghalien;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
+import javax.imageio.ImageIO;
 
 /**
  * Purpose: The reponsibility of SpaceShip is ...
@@ -33,75 +32,59 @@ import javax.swing.JComponent;
  * SpaceShip is-a ...
  * SpaceShip is ...
  */
-public class SpaceShip extends JComponent implements Moveable
+public class SpaceShip implements Moveable
 {
-	private int x;
-	private int y; 
-	private ImageIcon shipIcon = new ImageIcon("tempspaceship.jpg", "space ship");
-	public SpaceShip()
+	private int x; //SpaceShip HAS-A horizontal location
+	private int y; //SpaceShip HAS-A vertical location
+	private Image shipImage; //SpaceShip HAS-A image
+	
+	public void drawSpaceShip(Graphics g)
 	{
-		setPreferredSize(new Dimension(100, 100));
+		try
+		{
+			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png"));
+			shipImage = ship;
+			g.drawImage(shipImage, 100, 100, 150, 150, null);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	/** 
-	 * I still have to figure this out it shouldn't be hard
-	 * @return the x(horizontal) position of the Player
-	 */
-	public int getXPosition()
-	{
-		return 0;
-	}
-	
-	/** 
-	 * I still have to figure this out it shouldn't be hard
-	 * @return the y(vertical) position of the Player
-	 */
-	public int getYPosition()
-	{
-		return 0;
-	}
 	
 	/**
 	 * Purpose: move something to the left
 	 */
-	public void moveLeft()
+	public void moveLeft(Graphics g)
 	{
-		setLocation(x - 10, y);
+		g.drawImage(shipImage, x - 10, y, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something to the right
 	 */
-	public void moveRight()
+	public void moveRight(Graphics g)
 	{
-		setLocation(x + 10, y);
+		g.drawImage(shipImage, x + 10, y, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something up
 	 */
-	public void moveUp()
+	public void moveUp(Graphics g)
 	{
-		setLocation(x, y + 10);
+		g.drawImage(shipImage, x, y + 10, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something to the right
 	 */
-	public void moveDown()
+	public void moveDown(Graphics g)
 	{
-		setLocation(x, y - 10);
+		g.drawImage(shipImage, x, y - 10, 150, 150, null);
 	}
 	
-	/**
-	 * Purpose: generates the SpaceShip using shipIcon. 
-	 * I am still trying to figure out how to get it to work here is a youtube video. 
-	 * https://www.youtube.com/watch?v=dFOIoX3fXpQ
-	 */
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		g.drawImage(shipIcon.getImage(), 0,0, 100, 100, this);
-	}
 
 }

@@ -14,18 +14,16 @@
 * https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
 *
 * <<Add more references here>>
-* https://www.youtube.com/watch?v=23vDA55bzSg
-* https://www.youtube.com/watch?v=s_rX8YfRMyk
 *
-* Version: 2025-04-27
+* Version: 2025-04-28
 */
 package ghalien;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-
-import javax.swing.JComponent;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * Purpose: The reponsibility of Player is ...
@@ -33,82 +31,110 @@ import javax.swing.JComponent;
  * Player is-a ...
  * Player is ...
  */
-public class Player extends JComponent implements Moveable
+public class Player implements Moveable
 {
 	private String name;
-	private int x; //horizontal location
-	private int y; //vertical location
-	private Score score; //a Player has-a score
+	private int x = 400; //player HAS-A horizontal location
+	private int y = 400; //player HAS-A vertical location
+	private Image playerImage; //player HAS-A image
+	//private Score score;
 	
+	/**
+	 * Purpose: default constructor
+	 */
+	public Player()
+	{
+		name = null;
+	}
+	
+	/**
+	 * Purpose: constructor
+	 * @param newName initializes the name
+	 */
 	public Player(String newName)
 	{
-		//super(newName);
 		name = newName;
-		setPreferredSize(new Dimension(100, 100));
 	}
 	
-	/** 
-	 * I still have to figure this out it shouldn't be hard
-	 * @return the x(horizontal) position of the Player
+	/**
+	 * Purpose: sets the value of name
+	 * @param newName
 	 */
-	public int getXPosition()
+	public void setName(String newName)
 	{
-		return 0;
+		name = newName;
 	}
 	
-	/** 
-	 * I still have to figure this out it shouldn't be hard
-	 * @return the y(vertical) position of the Player
+	/**
+	 * Purpose: draws out the image of the player
+	 * @param g the graphics
 	 */
-	public int getYPosition()
+	public void drawPlayerImage(Graphics g)
 	{
-		return 0;
+		try
+		{
+			BufferedImage player = ImageIO.read(getClass().getResource("player.png"));
+			playerImage = player;
+			g.drawImage(playerImage, 100, 600, 150, 150,null);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Purpose: move something to the left
 	 */
-	public void moveLeft()
+	public void moveLeft(Graphics g)
 	{
-		setLocation(x - 10, y);
+		g.drawImage(playerImage, x - 50, y, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something to the right
 	 */
-	public void moveRight()
+	public void moveRight(Graphics g)
 	{
-		setLocation(x + 10, y);
+		g.drawImage(playerImage, x + 50, y, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something up
 	 */
-	public void moveUp()
+	public void moveUp(Graphics g)
 	{
-		setLocation(x, y + 10);
+		g.drawImage(playerImage, x, y + 50, 150, 150, null);
 	}
 	
 	/**
 	 * Purpose: move something to the right
 	 */
-	public void moveDown()
+	public void moveDown(Graphics g)
 	{
-		setLocation(x, y - 10);
+		g.drawImage(playerImage, x, y - 50, 150, 150, null);
+	}
+	
+	/**
+	 * Purpose: 
+	 * @return x (horizontal) location
+	 */
+	public int getXLocation()
+	{
+		return x;
+	}
+	
+	/**
+	 * Purpose: 
+	 * @return y (vertical) location
+	 */
+	public int getYLocation()
+	{
+		return y;
 	}
 	
 	public String toString()
 	{
 		return name;
-	}
-	
-	/**
-	 * Purpose: generates the player as a Blue circle
-	 */
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.fillOval(0, 0, 100, 100);
 	}
 }
