@@ -25,6 +25,8 @@ package ghalien;
  * AlienInvasionModel is-a ...
  * AlienInvasionModel is ...
  */
+
+//test commit access
 public class AlienInvasionModel
 {
 	public AlienInvasionModel()
