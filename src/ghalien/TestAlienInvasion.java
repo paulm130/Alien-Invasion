@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-27
+* Version: 2025-05-02
 */
 package ghalien;
 
@@ -36,7 +36,7 @@ class TestAlienInvasion
 	void testPlayer()
 	{
 		Player grace = new Player("Grace");
-		assertEquals("Grace", grace.toString());
+		assertEquals("Grace, Score: 0", grace.toString());
 	}
 	
 	@Test
@@ -48,6 +48,18 @@ class TestAlienInvasion
 		score.updateScore();
 		assertEquals(score.getScore(), 1);
 		assertEquals(score.toString(), "Score: 1");
+	}
+	
+	@Test
+	void testLeaderboard()
+	{
+		Player grace = new Player("Grace");
+		Player paul = new Player("Paul");
+		Leaderboard leaderboard = new Leaderboard();
+		leaderboard.addPlayer(grace);
+		assertEquals(leaderboard.toString(0), "Grace, Score: 0");
+		leaderboard.addPlayer(paul);
+		assertEquals(leaderboard.toString(1), "Paul, Score: 0");
 	}
 	
 	//more tests will be added soon

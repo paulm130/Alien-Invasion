@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-28
+* Version: 2025-05-01
 */
 package ghalien;
 
@@ -37,7 +37,7 @@ public class Player implements Moveable
 	private int x = 400; //player HAS-A horizontal location
 	private int y = 400; //player HAS-A vertical location
 	private Image playerImage; //player HAS-A image
-	//private Score score;
+	private Score score;
 	
 	/**
 	 * Purpose: default constructor
@@ -45,6 +45,7 @@ public class Player implements Moveable
 	public Player()
 	{
 		name = null;
+		score = new Score();
 	}
 	
 	/**
@@ -54,6 +55,7 @@ public class Player implements Moveable
 	public Player(String newName)
 	{
 		name = newName;
+		score = new Score();
 	}
 	
 	/**
@@ -133,8 +135,20 @@ public class Player implements Moveable
 		return y;
 	}
 	
+	/**
+	 * Purpose: returns the player data as a String
+	 * @return the player's name and score
+	 */
 	public String toString()
 	{
-		return name;
+		return name + ", " + score.toString();
+	}
+	
+	/**
+	 * Purpose: increments the players score by 1
+	 */
+	public void updateScore()
+	{
+		score.updateScore();
 	}
 }
