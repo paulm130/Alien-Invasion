@@ -136,12 +136,14 @@ public class Player implements Moveable
 	}
 	
 	/**
-	 * Purpose: returns the player data as a String
+	 * Purpose: returns the player data as a String. Only printing out the numerical value of the score not the word "score".
 	 * @return the player's name and score
 	 */
 	public String toString()
 	{
-		return name + ", " + score.toString();
+		String scoreString = score.toString();
+		String scoreSubstring = scoreString.substring(scoreString.indexOf(":")+1,scoreString.length());
+		return name + "," + scoreSubstring;
 	}
 	
 	/**

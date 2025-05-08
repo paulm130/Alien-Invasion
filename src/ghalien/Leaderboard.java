@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-02
+* Version: 2025-05-08
 */
 package ghalien;
 
@@ -34,8 +34,9 @@ public class Leaderboard
 	private ArrayList<Player> players; //a Leaderboard has players
 	private PrintWriter outputFileWriter; //a Leaderboard has-a outputFileWriter
 	
-	//adding file I/O in this class eventually
-	
+	/**
+	 * Purpose: default constructor
+	 */
 	public Leaderboard()
 	{
 		players = new ArrayList<>();
@@ -62,7 +63,7 @@ public class Leaderboard
 	}
 	
 	/**
-	 * Purpose: writes the leaderboard data to a csv file. I have not tested this yet so it probably does not work right
+	 * Purpose: writes the data from the Leaderboard to a .csv output file
 	 */
 	public void outputLeaderboard()
 	{
@@ -70,6 +71,8 @@ public class Leaderboard
 		try 
 		{
 			outputFileWriter = new PrintWriter("playerData.csv");
+			outputFileWriter.println("Name, Score");
+			
 			for(int i = 0; i < players.size(); i++)
 			{
 				outputFileWriter.println(this.toString(i));

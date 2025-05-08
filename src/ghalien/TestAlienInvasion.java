@@ -15,11 +15,15 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-02
+* Version: 2025-05-08
 */
 package ghalien;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +40,7 @@ class TestAlienInvasion
 	void testPlayer()
 	{
 		Player grace = new Player("Grace");
-		assertEquals("Grace, Score: 0", grace.toString());
+		assertEquals("Grace, 0", grace.toString());
 	}
 	
 	@Test
@@ -51,15 +55,27 @@ class TestAlienInvasion
 	}
 	
 	@Test
-	void testLeaderboard()
+	void testLeaderboard() throws FileNotFoundException
 	{
 		Player grace = new Player("Grace");
 		Player paul = new Player("Paul");
 		Leaderboard leaderboard = new Leaderboard();
 		leaderboard.addPlayer(grace);
-		assertEquals(leaderboard.toString(0), "Grace, Score: 0");
+		assertEquals(leaderboard.toString(0), "Grace, 0");
 		leaderboard.addPlayer(paul);
-		assertEquals(leaderboard.toString(1), "Paul, Score: 0");
+		assertEquals(leaderboard.toString(1), "Paul, 0");
+		
+		//testing that data was written to the file correctly
+		leaderboard.outputLeaderboard();
+		File myFile = new File("playerData.csv");
+		Scanner scan = new Scanner(myFile);
+		String data = scan.nextLine();
+		assertEquals(data, "Name, Score");
+		data = scan.nextLine();
+		assertEquals(data, "Grace, 0");
+		data = scan.nextLine();
+		assertEquals(data, "Paul, 0");
+		scan.close();
 	}
 	
 	//more tests will be added soon
