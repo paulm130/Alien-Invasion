@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-28
+* Version: 2025-05-09
 */
 package ghalien;
 
@@ -24,6 +24,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,7 +37,7 @@ import javax.swing.JPanel;
  * AlienInvasionView is-a ...
  * AlienInvasionView is ...
  */
-public class AlienInvasionView extends JFrame
+public class AlienInvasionView extends JFrame implements MouseListener
 {
 	private AlienInvasionModel gameModel;
 	
@@ -57,6 +59,7 @@ public class AlienInvasionView extends JFrame
 		
 		//Player panel + ship panel
 		PlayerShipPanel mainPanel = new PlayerShipPanel();
+		mainPanel.addMouseListener(this);
 		this.add(mainPanel, BorderLayout.CENTER);
 		
 		//Score panel
@@ -86,6 +89,45 @@ public class AlienInvasionView extends JFrame
 	public static void main(String[] args)
 	{
 		new AlienInvasionView(new AlienInvasionModel());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+		//trying to get the shoot functionality up and running
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Shot fired at " + x + " " + y);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -12,10 +12,13 @@
 * Morelli, R., & Walde, R. (2016).
 * Java, Java, Java: Object-Oriented Problem Solving
 * https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+* 
+* Interface MouseListener, 
+* https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-01
+* Version: 2025-05-09
 */
 package ghalien;
 
@@ -90,7 +93,8 @@ public class Player implements Moveable
 	 */
 	public void moveLeft(Graphics g)
 	{
-		g.drawImage(playerImage, x - 50, y, 150, 150, null);
+		x -= 50;
+		g.drawImage(playerImage, x , y, 150, 150, null);
 	}
 	
 	/**
@@ -98,7 +102,8 @@ public class Player implements Moveable
 	 */
 	public void moveRight(Graphics g)
 	{
-		g.drawImage(playerImage, x + 50, y, 150, 150, null);
+		x += 50;
+		g.drawImage(playerImage, x, y, 150, 150, null);
 	}
 	
 	/**
@@ -106,7 +111,8 @@ public class Player implements Moveable
 	 */
 	public void moveUp(Graphics g)
 	{
-		g.drawImage(playerImage, x, y + 50, 150, 150, null);
+		y += 50;
+		g.drawImage(playerImage, x, y, 150, 150, null);
 	}
 	
 	/**
@@ -114,7 +120,8 @@ public class Player implements Moveable
 	 */
 	public void moveDown(Graphics g)
 	{
-		g.drawImage(playerImage, x, y - 50, 150, 150, null);
+		y -= 50;
+		g.drawImage(playerImage, x, y, 150, 150, null);
 	}
 	
 	/**
