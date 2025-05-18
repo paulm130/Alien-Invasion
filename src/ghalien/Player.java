@@ -18,7 +18,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-09
+* Version: 2025-05-17
 */
 package ghalien;
 
@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -37,10 +38,10 @@ import javax.imageio.ImageIO;
 public class Player implements Moveable
 {
 	private String name;
-	private int x = 400; //player HAS-A horizontal location
-	private int y = 400; //player HAS-A vertical location
+	private int x; //player HAS-A horizontal location
+	private int y; //player HAS-A vertical location
 	private Image playerImage; //player HAS-A image
-	private Score score;
+	private Score score; //player HAS-A score
 	
 	/**
 	 * Purpose: default constructor
@@ -49,6 +50,8 @@ public class Player implements Moveable
 	{
 		name = null;
 		score = new Score();
+		x = 100;
+		y = 600;
 	}
 	
 	/**
@@ -59,6 +62,8 @@ public class Player implements Moveable
 	{
 		name = newName;
 		score = new Score();
+		x = 100;
+		y = 600;
 	}
 	
 	/**
@@ -80,7 +85,7 @@ public class Player implements Moveable
 		{
 			BufferedImage player = ImageIO.read(getClass().getResource("player.png"));
 			playerImage = player;
-			g.drawImage(playerImage, 100, 600, 150, 150,null);
+			g.drawImage(playerImage, x, y, 150, 150,null);
 		}
 		catch (IOException e)
 		{
@@ -88,40 +93,37 @@ public class Player implements Moveable
 		}
 	}
 	
-	/**
-	 * Purpose: move something to the left
-	 */
-	public void moveLeft(Graphics g)
+	@Override
+	public void moveLeft()
 	{
-		x -= 50;
-		g.drawImage(playerImage, x , y, 150, 150, null);
+		// TODO Auto-generated method stub
+		if(x >= 25)
+			x -= 25;
 	}
-	
-	/**
-	 * Purpose: move something to the right
-	 */
-	public void moveRight(Graphics g)
+
+	@Override
+	public void moveRight(int panelWidth)
 	{
-		x += 50;
-		g.drawImage(playerImage, x, y, 150, 150, null);
+		// TODO Auto-generated method stub
+		if(x + 175 <= panelWidth)
+			x += 25;
 	}
-	
-	/**
-	 * Purpose: move something up
-	 */
-	public void moveUp(Graphics g)
+
+	@Override
+	public void moveUp()
 	{
-		y += 50;
-		g.drawImage(playerImage, x, y, 150, 150, null);
+		// TODO Auto-generated method stub
+		if(y >= 25)
+			y -= 25;
 	}
-	
-	/**
-	 * Purpose: move something to the right
-	 */
-	public void moveDown(Graphics g)
+
+	@Override
+	public void moveDown(int panelHeight)
 	{
-		y -= 50;
-		g.drawImage(playerImage, x, y, 150, 150, null);
+		// TODO Auto-generated method stub
+		if(y + 175 <= panelHeight)
+			y += 25;
+
 	}
 	
 	/**

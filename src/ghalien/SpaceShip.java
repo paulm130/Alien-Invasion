@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Grace Ho; student ID
-* @author Full name; student ID
+* @author Paul Montal; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-28
+* Version: 2025-05-17
 */
 package ghalien;
 
@@ -38,13 +38,22 @@ public class SpaceShip implements Moveable
 	private int y; //SpaceShip HAS-A vertical location
 	private Image shipImage; //SpaceShip HAS-A image
 	
+	/**
+	 * Purpose: constructor 
+	 */
+	public SpaceShip()
+	{
+		x = 100;
+		y = 100;
+	}
+	
 	public void drawSpaceShip(Graphics g)
 	{
 		try
 		{
 			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png"));
 			shipImage = ship;
-			g.drawImage(shipImage, 100, 100, 150, 150, null);
+			g.drawImage(shipImage, x, y, 150, 150, null);
 		}
 		catch (IOException e)
 		{
@@ -52,39 +61,37 @@ public class SpaceShip implements Moveable
 			e.printStackTrace();
 		}
 	}
-	
-	
-	/**
-	 * Purpose: move something to the left
-	 */
-	public void moveLeft(Graphics g)
-	{
-		g.drawImage(shipImage, x - 10, y, 150, 150, null);
-	}
-	
-	/**
-	 * Purpose: move something to the right
-	 */
-	public void moveRight(Graphics g)
-	{
-		g.drawImage(shipImage, x + 10, y, 150, 150, null);
-	}
-	
-	/**
-	 * Purpose: move something up
-	 */
-	public void moveUp(Graphics g)
-	{
-		g.drawImage(shipImage, x, y + 10, 150, 150, null);
-	}
-	
-	/**
-	 * Purpose: move something to the right
-	 */
-	public void moveDown(Graphics g)
-	{
-		g.drawImage(shipImage, x, y - 10, 150, 150, null);
-	}
-	
 
+	@Override
+	public void moveLeft()
+	{
+		// TODO Auto-generated method stub
+		if(x >= 100)
+			x -= 100;
+	}
+
+	@Override
+	public void moveRight(int panelWidth)
+	{
+		// TODO Auto-generated method stub
+		if(x + 250 <= panelWidth)
+			x += 100;
+	}
+
+	@Override
+	public void moveUp()
+	{
+		// TODO Auto-generated method stub
+		if(y >= 100)
+			y -= 100;
+	}
+
+	@Override
+	public void moveDown(int panelHeight)
+	{
+		// TODO Auto-generated method stub
+		if(y + 250 <= panelHeight)
+			y += 100;
+
+	}
 }

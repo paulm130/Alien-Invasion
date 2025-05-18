@@ -39,10 +39,11 @@ import javax.swing.JPanel;
  */
 public class AlienInvasionView extends JFrame implements MouseListener
 {
-	private AlienInvasionModel gameModel;
+	private AlienInvasionModel gameModel; //a AlienInvasionModel has-a gameModel
 	
 	public AlienInvasionView(AlienInvasionModel model)
 	{
+		
 		super("Alien Invasion"); //give JFrame a visible name
 		gameModel = model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //will close when the "x" button in corner is clicked

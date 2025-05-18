@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Grace Ho; student ID
-* @author Full name; student ID
+* @author Paul Montal; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -15,11 +15,10 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-28
+* Version: 2025-05-17
 */
 package ghalien;
 
-import java.awt.Graphics;
 
 /**
  * Purpose: The reponsibility of Moveable is ...
@@ -32,20 +31,22 @@ public interface Moveable
 	/**
 	 * Purpose: move something to the left
 	 */
-	void moveLeft(Graphics g);
+	void moveLeft();
 	
 	/**
 	 * Purpose: move something to the right
+	 * @param panelWidth
 	 */
-	void moveRight(Graphics g);
+	void moveRight(int panelWidth);
 	
 	/**
 	 * Purpose: move something up
 	 */
-	void moveUp(Graphics g);
+	void moveUp();
 	
 	/**
-	 * Purpose: move something to the right
+	 * Purpose: move something down
+	 * @param panelHeight
 	 */
-	void moveDown(Graphics g);
+	void moveDown(int panelHeight);
 }
