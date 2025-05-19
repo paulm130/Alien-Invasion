@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-17
+* Version: 2025-05-18
 */
 package ghalien;
 
@@ -92,6 +92,23 @@ public class SpaceShip implements Moveable
 		// TODO Auto-generated method stub
 		if(y + 250 <= panelHeight)
 			y += 100;
-
+	}
+	
+	/**
+	 * Purpose: returns x(horizontal) location
+	 * @return x
+	 */
+	public int getXLocation()
+	{
+		return x;
+	}
+	
+	/**
+	 * Purpose: returns y(vertical) location
+	 * @return y
+	 */
+	public int getYLocation()
+	{
+		return y;
 	}
 }

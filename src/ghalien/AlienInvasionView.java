@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-09
+* Version: 2025-05-18
 */
 package ghalien;
 
@@ -29,6 +29,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,9 +38,12 @@ import javax.swing.JPanel;
  * AlienInvasionView is-a ...
  * AlienInvasionView is ...
  */
-public class AlienInvasionView extends JFrame implements MouseListener
+public class AlienInvasionView extends JFrame
 {
 	private AlienInvasionModel gameModel; //a AlienInvasionModel has-a gameModel
+	private Score score; //a AlienInvasionModel has-a score
+	private JLabel scoreLabel; //a AlienInvasionModel has-a scoreLabel
+	private PlayerShipPanel mainPanel; //a AlienInvasionView has-a mainPanel
 	
 	public AlienInvasionView(AlienInvasionModel model)
 	{
@@ -59,14 +63,13 @@ public class AlienInvasionView extends JFrame implements MouseListener
 		this.add(instructions, BorderLayout.WEST);
 		
 		//Player panel + ship panel
-		PlayerShipPanel mainPanel = new PlayerShipPanel();
-		mainPanel.addMouseListener(this);
+		mainPanel = new PlayerShipPanel(this);
 		this.add(mainPanel, BorderLayout.CENTER);
 		
 		//Score panel
 		JPanel scorePanel = new JPanel();
-		Score score = new Score();
-		JLabel scoreLabel = new JLabel(score.toString());
+		score = new Score();
+		scoreLabel = new JLabel(score.toString());
 		scorePanel.add(scoreLabel);
 		this.add(scorePanel, BorderLayout.EAST);
 		
@@ -79,9 +82,35 @@ public class AlienInvasionView extends JFrame implements MouseListener
 		
 	}
 	
-	public void updateGUI(Graphics g)
+	/**
+	 * Purpose: updates the score and checks if it is gameOver
+	 * @param updateType 0 means score update, 1 means lost due to too many aliens, 2 means lost due to collision with spaceShip
+	 */
+	public void updateGUI(int updateType)
 	{
-		
+		switch(updateType)
+		{
+			case 0:	
+				score.updateScore();
+				scoreLabel.setText(score.toString());
+				
+				if(score.getScore() == 50)
+				{
+					mainPanel.gameOver();
+					JOptionPane.showMessageDialog(null, "You saved Earth from the Aliens! You Win!");
+				}
+				break;
+				
+			case 1:
+				mainPanel.gameOver();
+				JOptionPane.showMessageDialog(null, "Too many Aliens have invaded the Earth. You lose ):");
+				break;
+			
+			case 2:
+				mainPanel.gameOver();
+				JOptionPane.showMessageDialog(null, "You collided with an alien SpaceShip and destroyed your own SpaceShip. You lose ):");
+				break;
+		}
 	}
 	/**
 	 * Purpose: 
@@ -91,44 +120,4 @@ public class AlienInvasionView extends JFrame implements MouseListener
 	{
 		new AlienInvasionView(new AlienInvasionModel());
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-		//trying to get the shoot functionality up and running
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("Shot fired at " + x + " " + y);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
 }
