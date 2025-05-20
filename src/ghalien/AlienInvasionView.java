@@ -15,17 +15,11 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-18
+* Version: 2025-05-20
 */
 package ghalien;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;

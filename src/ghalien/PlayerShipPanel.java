@@ -17,14 +17,12 @@
 * https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyListener.html
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
 *
-* Version: 2025-05-18
+* Version: 2025-05-20
 */
 package ghalien;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,13 +30,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -68,7 +62,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		spaceShips = new ArrayList<>();
 		spaceShips.add(new SpaceShip());
 		
-		movementTimer = new Timer(10, this);		
+		movementTimer = new Timer(50, this);		
 		movementTimer.start();
 		
 		newSpaceShipTimer = new Timer(3000, this);

@@ -14,8 +14,9 @@
 * https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
 *
 * <<Add more references here>>
+* https://www.youtube.com/watch?v=wT9uNGzMEM4
 *
-* Version: 2025-05-18
+* Version: 2025-05-20
 */
 package ghalien;
 
@@ -66,32 +67,32 @@ public class SpaceShip implements Moveable
 	public void moveLeft()
 	{
 		// TODO Auto-generated method stub
-		if(x >= 100)
-			x -= 100;
+		if(x >= 50)
+			x -= 50;
 	}
 
 	@Override
 	public void moveRight(int panelWidth)
 	{
 		// TODO Auto-generated method stub
-		if(x + 250 <= panelWidth)
-			x += 100;
+		if(x + 200 <= panelWidth)
+			x += 50;
 	}
 
 	@Override
 	public void moveUp()
 	{
 		// TODO Auto-generated method stub
-		if(y >= 100)
-			y -= 100;
+		if(y >= 50)
+			y -= 50;
 	}
 
 	@Override
 	public void moveDown(int panelHeight)
 	{
 		// TODO Auto-generated method stub
-		if(y + 250 <= panelHeight)
-			y += 100;
+		if(y + 200 <= panelHeight)
+			y += 50;
 	}
 	
 	/**
