@@ -15,11 +15,13 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-08
+* Version: 2025-05-22
 */
 package ghalien;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -63,24 +65,25 @@ public class Leaderboard
 	}
 	
 	/**
-	 * Purpose: writes the data from the Leaderboard to a .csv output file
+	 * Purpose: writes the data from the Leaderboard to a .csv output file. Appends data onto whatever is already in leaderboard.
 	 */
 	public void outputLeaderboard()
 	{
 		
 		try 
 		{
-			outputFileWriter = new PrintWriter("playerData.csv");
-			outputFileWriter.println("Name, Score");
+			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true));
 			
 			for(int i = 0; i < players.size(); i++)
 			{
 				outputFileWriter.println(this.toString(i));
 			}
 		}
-		catch(FileNotFoundException e)
+		catch (IOException e)
 		{
+			// TODO Auto-generated catch block
 			System.out.println("Cannot write file. File will not be written");
+			e.printStackTrace();
 		}	
 		finally
 		{

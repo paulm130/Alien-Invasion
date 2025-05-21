@@ -16,8 +16,9 @@
 * <<Add more references here>>
 * https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyListener.html
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
+* https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html
 *
-* Version: 2025-05-20
+* Version: 2025-05-22
 */
 package ghalien;
 
@@ -144,7 +145,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 			{
 				Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
 				if(player.intersects(spaceShip))
-					alienInvasionView.updateGUI(2);
+					alienInvasionView.updateGUI(2, newPlayer);
 			}
 			
 			repaint();
@@ -155,7 +156,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		{
 			spaceShips.add(new SpaceShip());
 			if(spaceShips.size() >= 5)
-				alienInvasionView.updateGUI(1);
+				alienInvasionView.updateGUI(1, newPlayer);
 		}
 	}
 	
@@ -225,7 +226,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				System.out.println("Shot down SpaceShip " + i);
 				spaceShips.remove(i);
 				repaint();
-				alienInvasionView.updateGUI(0); 
+				alienInvasionView.updateGUI(0, newPlayer); 
 			}
 		}
 	}

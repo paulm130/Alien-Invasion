@@ -15,11 +15,12 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-20
+* Version: 2025-05-22
 */
 package ghalien;
 
 import java.awt.BorderLayout;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,12 +39,21 @@ public class AlienInvasionView extends JFrame
 	private Score score; //a AlienInvasionModel has-a score
 	private JLabel scoreLabel; //a AlienInvasionModel has-a scoreLabel
 	private PlayerShipPanel mainPanel; //a AlienInvasionView has-a mainPanel
+	private Leaderboard leaderboard; //a AlienInvasionView has-a leaderboard
+	private String playerName; //a AlienInvasionView has-a playerName
 	
 	public AlienInvasionView(AlienInvasionModel model)
-	{
-		
+	{	
 		super("Alien Invasion"); //give JFrame a visible name
+		
+		//player must enter their name before the game begins
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter your name: ");
+		playerName = scan.nextLine();
+		scan.close();
+		
 		gameModel = model;
+		leaderboard = new Leaderboard();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //will close when the "x" button in corner is clicked
 		setSize(800,800);
 		setResizable(false);
@@ -79,30 +89,39 @@ public class AlienInvasionView extends JFrame
 	/**
 	 * Purpose: updates the score and checks if it is gameOver
 	 * @param updateType 0 means score update, 1 means lost due to too many aliens, 2 means lost due to collision with spaceShip
+	 * @param player the player that will be added to the leaderboard because if it is gameOver
 	 */
-	public void updateGUI(int updateType)
+	public void updateGUI(int updateType, Player player)
 	{
 		switch(updateType)
 		{
 			case 0:	
 				score.updateScore();
 				scoreLabel.setText(score.toString());
+				player.updateScore();
+				player.setName(playerName);
 				
 				if(score.getScore() == 50)
 				{
 					mainPanel.gameOver();
 					JOptionPane.showMessageDialog(null, "You saved Earth from the Aliens! You Win!");
+					leaderboard.addPlayer(player);
+					leaderboard.outputLeaderboard();
 				}
 				break;
 				
 			case 1:
 				mainPanel.gameOver();
 				JOptionPane.showMessageDialog(null, "Too many Aliens have invaded the Earth. You lose ):");
+				leaderboard.addPlayer(player);
+				leaderboard.outputLeaderboard();
 				break;
 			
 			case 2:
 				mainPanel.gameOver();
 				JOptionPane.showMessageDialog(null, "You collided with an alien SpaceShip and destroyed your own SpaceShip. You lose ):");
+				leaderboard.addPlayer(player);
+				leaderboard.outputLeaderboard();
 				break;
 		}
 	}
