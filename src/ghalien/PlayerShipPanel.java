@@ -53,7 +53,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	private Timer movementTimer; //a PlayerShipPanel has-a movementTimer
 	private Timer newSpaceShipTimer; //a PlayerShipPanel has-a newSpaceShipTimer
 	private Player newPlayer; //a PlayerShipPanel has-a newPlayer
-	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has spaceShips
+	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has-many spaceShips
 	private AlienInvasionView alienInvasionView; //a PlayerShipPanel has-a alienInvasionView
 	
 	/**
@@ -68,9 +68,9 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		spaceShips = new ArrayList<>();
 		spaceShips.add(new SpaceShip());
 		
-		movementTimer = new Timer(10, this);		
+		movementTimer = new Timer(1000/10, this);		
 		movementTimer.start();
-		
+
 		newSpaceShipTimer = new Timer(3000, this);
 		newSpaceShipTimer.start();
 		
@@ -120,27 +120,55 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		{
 			Random randomizer = new Random();
 			
+//			for(int i = 0; i < spaceShips.size(); i++)
+//			{
+//				int randomNumber = randomizer.nextInt(4);
+//				switch(randomNumber) 
+//				{
+//					case 0:
+//						spaceShips.get(i).moveLeft();
+//						this.paintComponent(getGraphics());
+//						break;
+//					case 1:
+//						spaceShips.get(i).moveRight(getWidth());
+//						this.paintComponent(getGraphics());
+//						break;
+//					case 2:
+//						spaceShips.get(i).moveUp();
+//						this.paintComponent(getGraphics());
+//						break;
+//					case 3:
+//						spaceShips.get(i).moveDown(getHeight());
+//						this.paintComponent(getGraphics());
+//						break;
+//				}
+//			}
+			
 			for(int i = 0; i < spaceShips.size(); i++)
 			{
 				int randomNumber = randomizer.nextInt(4);
-				switch(randomNumber) 
+				for (int j = 0; j < 50; j++)
 				{
-					case 0:
-						spaceShips.get(i).moveLeft();
-						this.paintComponent(getGraphics());
-						break;
-					case 1:
-						spaceShips.get(i).moveRight(getWidth());
-						this.paintComponent(getGraphics());
-						break;
-					case 2:
-						spaceShips.get(i).moveUp();
-						this.paintComponent(getGraphics());
-						break;
-					case 3:
-						spaceShips.get(i).moveDown(getHeight());
-						this.paintComponent(getGraphics());
-						break;
+					switch(randomNumber) 
+					{
+						case 0:
+							spaceShips.get(i).moveLeft();
+							//this.paintComponent(getGraphics());
+							break;
+						case 1:
+							spaceShips.get(i).moveRight(getWidth());
+							//this.paintComponent(getGraphics());
+							break;
+						case 2:
+							spaceShips.get(i).moveUp();
+							//this.paintComponent(getGraphics());
+							break;
+						case 3:
+							spaceShips.get(i).moveDown(getHeight());
+							//this.paintComponent(getGraphics());
+							break;
+					}
+					repaint();
 				}
 			}
 			
@@ -153,7 +181,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 					alienInvasionView.updateGUI(2);
 			}
 			
-			repaint();
+			//repaint();
 		}
 		
 		//when the newSpaceShipTimer triggers an ActionPerformed spawn a new SpaceShip in spaceShips

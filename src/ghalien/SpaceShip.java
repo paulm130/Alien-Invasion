@@ -53,7 +53,7 @@ public class SpaceShip implements Moveable
 		{
 			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png"));
 			shipImage = ship;
-			g.drawImage(shipImage, x, y, 150, 150, null);
+			g.drawImage(shipImage, getXLocation(), getYLocation(), 150, 150, null);
 		}
 		catch (IOException e)
 		{
@@ -67,7 +67,7 @@ public class SpaceShip implements Moveable
 	{
 		// TODO Auto-generated method stub
 		if(x >= 100)
-			x -= 100;
+			x --;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class SpaceShip implements Moveable
 	{
 		// TODO Auto-generated method stub
 		if(x + 250 <= panelWidth)
-			x += 100;
+			x ++;
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class SpaceShip implements Moveable
 	{
 		// TODO Auto-generated method stub
 		if(y >= 100)
-			y -= 100;
+			y --;
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class SpaceShip implements Moveable
 	{
 		// TODO Auto-generated method stub
 		if(y + 250 <= panelHeight)
-			y += 100;
+			y ++;
 	}
 	
 	/**
