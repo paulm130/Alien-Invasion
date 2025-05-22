@@ -59,30 +59,33 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	{
 		setBackground(Color.DARK_GRAY);
 		this.alienInvasionView = initAlienInvasionView;
-		newPlayer = new Player();
-		spaceShips = new ArrayList<>();
-		spaceShips.add(new SpaceShip());
+		newPlayer = new Player(); //create player
+		spaceShips = new ArrayList<>(); //create array of spaceShips (allows us to have multiple ships)
+		spaceShips.add(new SpaceShip()); //create ship and add to array
 		
 
-		movementTimer = new Timer(1000/10, this);		
-		movementTimer = new Timer(50, this);		
+		movementTimer = new Timer(1000/10, this); //will move at 10 frames per second (not like usual 60)	
 		movementTimer.start();
 
-		newSpaceShipTimer = new Timer(3000, this);
+		newSpaceShipTimer = new Timer(3000, this); //a new ship will spawn every 3 seconds
 		newSpaceShipTimer.start();
 		
 		//setting up KeyListener
-		setFocusable(true);
+		setFocusable(true); //if not focused, will not read key input
 		requestFocusInWindow();
-		addKeyListener(this);
+		addKeyListener(this); //will listen to keys and react based on what we coded
 		
-		addMouseListener(this);
+		addMouseListener(this); //will listen to mouse based on what we coded
 	}
 	
+	/**
+	 * Purpose:
+	 * @param g part of Graphics class, allows us access to Graphics methods
+	 */
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		newPlayer.drawPlayerImage(g);
+		newPlayer.drawPlayerImage(g); //draw player on screen
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			spaceShips.get(i).drawSpaceShip(g);
@@ -107,65 +110,37 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	}
 		
 	
+	/**
+	 * Purpose: Move spaceship
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		// TODO Auto-generated method stub
-		
 		//when the movementTimer triggers an ActionPerformed each SpaceShip moves in a random direction
 		if(e.getSource() == movementTimer)
 		{
-			Random randomizer = new Random();
-			
-//			for(int i = 0; i < spaceShips.size(); i++)
-//			{
-//				int randomNumber = randomizer.nextInt(4);
-//				switch(randomNumber) 
-//				{
-//					case 0:
-//						spaceShips.get(i).moveLeft();
-//						this.paintComponent(getGraphics());
-//						break;
-//					case 1:
-//						spaceShips.get(i).moveRight(getWidth());
-//						this.paintComponent(getGraphics());
-//						break;
-//					case 2:
-//						spaceShips.get(i).moveUp();
-//						this.paintComponent(getGraphics());
-//						break;
-//					case 3:
-//						spaceShips.get(i).moveDown(getHeight());
-//						this.paintComponent(getGraphics());
-//						break;
-//				}
-//			}
-			
+			Random randomizer = new Random(); //create randomizer for random numbers	
 			for(int i = 0; i < spaceShips.size(); i++)
 			{
-				int randomNumber = randomizer.nextInt(4);
-				for (int j = 0; j < 50; j++)
+				int randomNumber = randomizer.nextInt(4); //get numbers 0 - 3
+				for (int j = 0; j < 50; j++) //move a certain direction 50 times
 				{
 					switch(randomNumber) 
 					{
 						case 0:
 							spaceShips.get(i).moveLeft();
-							//this.paintComponent(getGraphics());
 							break;
 						case 1:
 							spaceShips.get(i).moveRight(getWidth());
-							//this.paintComponent(getGraphics());
 							break;
 						case 2:
 							spaceShips.get(i).moveUp();
-							//this.paintComponent(getGraphics());
 							break;
 						case 3:
 							spaceShips.get(i).moveDown(getHeight());
-							//this.paintComponent(getGraphics());
 							break;
 					}
-					repaint();
+					repaint(); //SpaceShip drawn in new location
 				}
 			}
 			
@@ -177,8 +152,6 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				if(player.intersects(spaceShip))
 					alienInvasionView.updateGUI(2, newPlayer);
 			}
-			
-			//repaint();
 		}
 		
 		//when the newSpaceShipTimer triggers an ActionPerformed spawn a new SpaceShip in spaceShips
@@ -198,31 +171,29 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		
 	}
 
+	/**
+	 * Purpose: Move the player
+	 */
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
-		
 		//when a key is pressed moves the player
 		int keyCode = e.getKeyCode();
 		
+		//keys and movement are related appropriately
 		switch(keyCode)
 		{
 			case KeyEvent.VK_LEFT:
 				newPlayer.moveLeft();
-				this.paintComponent(getGraphics());
 				break;
 			case KeyEvent.VK_RIGHT:
 				newPlayer.moveRight(getWidth());
-				this.paintComponent(getGraphics());
 				break;
 			case KeyEvent.VK_UP:
 				newPlayer.moveUp();
-				this.paintComponent(getGraphics());
 				break;
 			case KeyEvent.VK_DOWN:
 				newPlayer.moveDown(getHeight());
-				this.paintComponent(getGraphics());
 				break;	
 		}
 		
@@ -239,8 +210,6 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-		
 		//when a shot is fired determine where it was fired and if it hit a SpaceShip
 		int shotX = e.getX();
 		int shotY = e.getY();

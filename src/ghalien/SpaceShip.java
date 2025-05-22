@@ -51,25 +51,29 @@ public class SpaceShip implements Moveable
 	{
 		try
 		{
-			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png"));
-			shipImage = ship;
-			g.drawImage(shipImage, getXLocation(), getYLocation(), 150, 150, null);
+			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png")); //load image
+			shipImage = ship; //make image accessible globally
+			g.drawImage(shipImage, getXLocation(), getYLocation(), 150, 150, null); //draw space ship image at specific location
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Purpose: move left by 1
+	 */
 	@Override
 	public void moveLeft()
 	{
-		// TODO Auto-generated method stub
 		if(x >= 100)
 			x --;
 	}
 
+	/**
+	 * Purpose: move right by 1
+	 */
 	@Override
 	public void moveRight(int panelWidth)
 	{
@@ -78,6 +82,9 @@ public class SpaceShip implements Moveable
 			x ++;
 	}
 
+	/**
+	 * Purpose: move up by 1
+	 */
 	@Override
 	public void moveUp()
 	{
@@ -86,6 +93,9 @@ public class SpaceShip implements Moveable
 			y --;
 	}
 
+	/**
+	 * Purpose: move down by 1
+	 */
 	@Override
 	public void moveDown(int panelHeight)
 	{
