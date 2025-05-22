@@ -16,15 +16,14 @@
 * <<Add more references here>>
 * https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyListener.html
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
+* https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html
 *
-* Version: 2025-05-18
+* Version: 2025-05-22
 */
 package ghalien;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,13 +31,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -68,7 +63,9 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		spaceShips = new ArrayList<>();
 		spaceShips.add(new SpaceShip());
 		
+
 		movementTimer = new Timer(1000/10, this);		
+		movementTimer = new Timer(50, this);		
 		movementTimer.start();
 
 		newSpaceShipTimer = new Timer(3000, this);
@@ -178,7 +175,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 			{
 				Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
 				if(player.intersects(spaceShip))
-					alienInvasionView.updateGUI(2);
+					alienInvasionView.updateGUI(2, newPlayer);
 			}
 			
 			//repaint();
@@ -189,7 +186,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		{
 			spaceShips.add(new SpaceShip());
 			if(spaceShips.size() >= 5)
-				alienInvasionView.updateGUI(1);
+				alienInvasionView.updateGUI(1, newPlayer);
 		}
 	}
 	
@@ -259,7 +256,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				System.out.println("Shot down SpaceShip " + i);
 				spaceShips.remove(i);
 				repaint();
-				alienInvasionView.updateGUI(0); 
+				alienInvasionView.updateGUI(0, newPlayer); 
 			}
 		}
 	}
