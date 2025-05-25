@@ -14,8 +14,9 @@
 * https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
 *
 * <<Add more references here>>
+* https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 *
-* Version: 2025-05-22
+* Version: 2025-05-25
 */
 package ghalien;
 
@@ -48,11 +49,15 @@ public class AlienInvasionView extends JFrame
 	{	
 		super("Alien Invasion"); //give JFrame a visible name
 		
-		//player must enter their name before the game begins
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Enter your name: ");
-		playerName = scan.nextLine(); //get info that player provided
-		scan.close(); //must close scanner!
+		//the player inputs their name in a popup window
+		playerName = (String)JOptionPane.showInputDialog(this,"Enter your name","Enter name",
+				JOptionPane.PLAIN_MESSAGE);
+
+		//if the player did not input a name makes them try again until they succesfully input a name
+		while ((playerName == null) || (playerName.length() <= 0)) {
+			playerName = JOptionPane.showInputDialog(this,"You must enter a name! Enter your name","Enter name again",
+				    JOptionPane.WARNING_MESSAGE);
+		}		
 		
 		leaderboard = new Leaderboard();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //will close when the "x" button in corner is clicked
@@ -61,15 +66,15 @@ public class AlienInvasionView extends JFrame
 		
 		this.setLayout(new BorderLayout());	//JFrame now has the Border layout (NSEW)
 		
+		//Player panel + ship panel
+		mainPanel = new PlayerShipPanel(this); //create panel
+		this.add(mainPanel, BorderLayout.CENTER); //PlayerShipPanel is visible on JFrame
+		
 		//Instructions Panel
 		JPanel instructions = new JPanel(); //create panel
 		JLabel instructionLabel = new JLabel("Use arrow keys to move");
 		instructions.add(instructionLabel);
 		this.add(instructions, BorderLayout.WEST); //Instructions are visible on JFrame
-		
-		//Player panel + ship panel
-		mainPanel = new PlayerShipPanel(this); //create panel
-		this.add(mainPanel, BorderLayout.CENTER); //PlayerShipPanel is visible on JFrame
 		
 		//Score panel
 		JPanel scorePanel = new JPanel(); //create panel
@@ -84,7 +89,6 @@ public class AlienInvasionView extends JFrame
 		author.add(authorLabel);
 		this.add(author, BorderLayout.SOUTH); //Author info visible on JFrame
 		setVisible(true); //allow us to see our jframe
-		
 	}
 	
 	/**
@@ -116,6 +120,7 @@ public class AlienInvasionView extends JFrame
 			case 1:
 				mainPanel.gameOver();
 				JOptionPane.showMessageDialog(null, "Too many Aliens have invaded the Earth. You lose ):");
+				player.setName(playerName);
 				leaderboard.addPlayer(player);
 				leaderboard.outputLeaderboard();
 				break;
@@ -124,6 +129,7 @@ public class AlienInvasionView extends JFrame
 			case 2:
 				mainPanel.gameOver();
 				JOptionPane.showMessageDialog(null, "You collided with an alien SpaceShip and destroyed your own SpaceShip. You lose ):");
+				player.setName(playerName);
 				leaderboard.addPlayer(player);
 				leaderboard.outputLeaderboard();
 				break;

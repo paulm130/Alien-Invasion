@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-08
+* Version: 2025-05-25
 */
 package ghalien;
 
@@ -72,9 +72,21 @@ class TestAlienInvasion
 		String data = scan.nextLine();
 		assertEquals(data, "Name, Score");
 		data = scan.nextLine();
-		assertEquals(data, "Grace, 0");
-		data = scan.nextLine();
-		assertEquals(data, "Paul, 0");
+		assertEquals(data, "Paul, 9");
+		
+		//checking that the last 2 items added to the .csv file actually got added last
+		while(scan.hasNextLine())
+		{
+			data = scan.nextLine();
+			if(data == "Grace, 0")
+			{
+				data = scan.nextLine();
+				assertEquals(data, "Paul, 0");
+				data = scan.nextLine();
+				assertEquals(data, "");
+			}
+		}
+		
 		scan.close();
 	}
 	

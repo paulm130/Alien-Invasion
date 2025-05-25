@@ -18,7 +18,7 @@
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
 * https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html
 *
-* Version: 2025-05-22
+* Version: 2025-05-25
 */
 package ghalien;
 
@@ -45,11 +45,11 @@ import javax.swing.Timer;
  */
 public class PlayerShipPanel extends JPanel implements ActionListener, KeyListener, MouseListener
 {
-	private Timer movementTimer; //a PlayerShipPanel has-a movementTimer
-	private Timer newSpaceShipTimer; //a PlayerShipPanel has-a newSpaceShipTimer
+	private Timer timer; //a PlayerShipPanel has-a timer
 	private Player newPlayer; //a PlayerShipPanel has-a newPlayer
 	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has-many spaceShips
 	private AlienInvasionView alienInvasionView; //a PlayerShipPanel has-a alienInvasionView
+	private int actionCounter; //a PlayerShipPanel has-a actionCounter
 	
 	/**
 	 * Purpose: constructor
@@ -64,11 +64,8 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		spaceShips.add(new SpaceShip()); //create ship and add to array
 		
 
-		movementTimer = new Timer(1000/10, this); //will move at 10 frames per second (not like usual 60)	
-		movementTimer.start();
-
-		newSpaceShipTimer = new Timer(3000, this); //a new ship will spawn every 3 seconds
-		newSpaceShipTimer.start();
+		timer = new Timer(1000/10, this); //will move at 10 frames per second (not like usual 60)	
+		timer.start();
 		
 		//setting up KeyListener
 		setFocusable(true); //if not focused, will not read key input
@@ -116,48 +113,46 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		//when the movementTimer triggers an ActionPerformed each SpaceShip moves in a random direction
-		if(e.getSource() == movementTimer)
+		actionCounter++; //increment the actionCounter each time there is an action
+		Random randomizer = new Random(); //create randomizer for random numbers	
+		for(int i = 0; i < spaceShips.size(); i++)
 		{
-			Random randomizer = new Random(); //create randomizer for random numbers	
-			for(int i = 0; i < spaceShips.size(); i++)
+			int randomNumber = randomizer.nextInt(4); //get numbers 0 - 3
+			for (int j = 0; j < 50; j++) //move a certain direction 50 times
 			{
-				int randomNumber = randomizer.nextInt(4); //get numbers 0 - 3
-				for (int j = 0; j < 50; j++) //move a certain direction 50 times
+				switch(randomNumber) 
 				{
-					switch(randomNumber) 
-					{
-						case 0:
-							spaceShips.get(i).moveLeft();
-							break;
-						case 1:
-							spaceShips.get(i).moveRight(getWidth());
-							break;
-						case 2:
-							spaceShips.get(i).moveUp();
-							break;
-						case 3:
-							spaceShips.get(i).moveDown(getHeight());
-							break;
-					}
-					repaint(); //SpaceShip drawn in new location
+					case 0:
+						spaceShips.get(i).moveLeft();
+						break;
+					case 1:
+						spaceShips.get(i).moveRight(getWidth());
+						break;
+					case 2:
+						spaceShips.get(i).moveUp();
+						break;
+					case 3:
+						spaceShips.get(i).moveDown(getHeight());
+						break;
 				}
-			}
-			
-			//if the player and a SpaceShip collided will update the GUI with gameOver code
-			Rectangle player = new Rectangle(newPlayer.getXLocation(), newPlayer.getYLocation(), 150, 150);
-			for(int i = 0; i < spaceShips.size(); i++)
-			{
-				Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
-				if(player.intersects(spaceShip))
-					alienInvasionView.updateGUI(2, newPlayer);
+				repaint(); //SpaceShip drawn in new location
 			}
 		}
 		
-		//when the newSpaceShipTimer triggers an ActionPerformed spawn a new SpaceShip in spaceShips
-		else
+		//if the player and a SpaceShip collided will update the GUI with gameOver code
+		Rectangle player = new Rectangle(newPlayer.getXLocation(), newPlayer.getYLocation(), 150, 150);
+		for(int i = 0; i < spaceShips.size(); i++)
+		{
+			Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
+			if(player.intersects(spaceShip))
+				alienInvasionView.updateGUI(2, newPlayer);
+		}
+		
+		//if there has been 30 actions(3 seconds) make a new spaceship
+		if(actionCounter == 30)
 		{
 			spaceShips.add(new SpaceShip());
+			actionCounter = 0; //reset the actionCounter
 			if(spaceShips.size() >= 5)
 				alienInvasionView.updateGUI(1, newPlayer);
 		}
@@ -222,7 +217,6 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 			
 			if(shotX >= shipX && shotX <= shipX + 150 && shotY >= shipY && shotY <= shipY + 150)
 			{
-				System.out.println("Shot down SpaceShip " + i);
 				spaceShips.remove(i);
 				repaint();
 				alienInvasionView.updateGUI(0, newPlayer); 
@@ -263,8 +257,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	 */
 	public void gameOver()
 	{
-		movementTimer.stop();
-		newSpaceShipTimer.stop();
+		timer.stop();
 		removeKeyListener(this);
 		removeMouseListener(this);
 	}
