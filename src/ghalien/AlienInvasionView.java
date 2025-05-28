@@ -72,7 +72,7 @@ public class AlienInvasionView extends JFrame
 		
 		//Instructions Panel
 		JPanel instructions = new JPanel(); //create panel
-		JLabel instructionLabel = new JLabel("Use arrow keys to move");
+		JLabel instructionLabel = new JLabel("Use arrow keys to move and click enemy ships to shoot");
 		instructions.add(instructionLabel);
 		this.add(instructions, BorderLayout.WEST); //Instructions are visible on JFrame
 		

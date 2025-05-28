@@ -37,6 +37,7 @@ public class SpaceShip implements Moveable
 	private int x; //SpaceShip HAS-A horizontal location
 	private int y; //SpaceShip HAS-A vertical location
 	private Image shipImage; //SpaceShip HAS-A image
+	private Image shotImage; //SpaceShip HAS-A(n) image for a shot
 	
 	/**
 	 * Purpose: constructor 
@@ -121,4 +122,5 @@ public class SpaceShip implements Moveable
 	{
 		return y;
 	}
+	
 }

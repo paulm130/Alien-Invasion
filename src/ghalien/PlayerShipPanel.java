@@ -31,9 +31,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -50,6 +54,10 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has-many spaceShips
 	private AlienInvasionView alienInvasionView; //a PlayerShipPanel has-a alienInvasionView
 	private int actionCounter; //a PlayerShipPanel has-a actionCounter
+	private int shipX = 0; //PlayerShipPanel has-a (records) the ship's x coordinate
+	private int shipY = 0; //PlayerShipPanel has-a (records) the ship's coordinate
+	private Image shotImage; //PlayerShipPanel has-a shot image
+	private int shotStatus = 0; //PlayerShipPanel has-a shotStatus
 	
 	/**
 	 * Purpose: constructor
@@ -83,6 +91,22 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	{
 		super.paintComponent(g);
 		newPlayer.drawPlayerImage(g); //draw player on screen
+		System.out.println(spaceShips.size());
+		if(shotStatus == 1)
+		{
+			try
+			{
+				BufferedImage shot = ImageIO.read(getClass().getResource("Shot.png"));
+				shotImage = shot;
+				g.drawImage(shotImage, shipX, shipY, 150, 150,null);
+				System.out.println("work");
+				shotStatus = 0;
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			spaceShips.get(i).drawSpaceShip(g);
@@ -212,11 +236,12 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			SpaceShip ship = spaceShips.get(i);
-			int shipX = ship.getXLocation();
-			int shipY = ship.getYLocation();
+			shipX = ship.getXLocation();
+			shipY = ship.getYLocation();
 			
 			if(shotX >= shipX && shotX <= shipX + 150 && shotY >= shipY && shotY <= shipY + 150)
 			{
+				shotStatus =  1;
 				spaceShips.remove(i);
 				repaint();
 				alienInvasionView.updateGUI(0, newPlayer); 
