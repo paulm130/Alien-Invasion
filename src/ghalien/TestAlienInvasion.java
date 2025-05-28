@@ -90,5 +90,45 @@ class TestAlienInvasion
 		scan.close();
 	}
 	
+	@Test
+	void testShipMove()
+	{
+		SpaceShip testShip = new SpaceShip();
+		
+		testShip.moveLeft();
+		assertEquals(99, testShip.getXLocation());
+		assertEquals(100,testShip.getYLocation());
+		
+		testShip.moveRight(400);
+		assertEquals(100, testShip.getXLocation());
+		assertEquals(100,testShip.getYLocation());
+		
+		testShip.moveUp();
+		assertEquals(99, testShip.getYLocation());
+		
+		testShip.moveDown(400);
+		assertEquals(100, testShip.getYLocation());
+	}
+	
+	@Test
+	void playerMove()
+	{
+		Player testPlayer = new Player();
+		
+		testPlayer.moveLeft();
+		assertEquals(75, testPlayer.getXLocation());
+		assertEquals(600,testPlayer.getYLocation());
+		
+		testPlayer.moveRight(800);
+		assertEquals(100, testPlayer.getXLocation());
+		assertEquals(600,testPlayer.getYLocation());
+		
+		testPlayer.moveUp();
+		assertEquals(575, testPlayer.getYLocation());
+		
+		testPlayer.moveDown(800);
+		assertEquals(600, testPlayer.getYLocation());
+	}
+	
 	//more tests will be added soon
 }
