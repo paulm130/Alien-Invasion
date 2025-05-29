@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Paul Montal; student ID
-* @author Full name; student ID
+* @author Grace Ho; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -21,7 +21,7 @@ package ghalien;
 
 public class Score
 {
-	private int score;//a Score has-a score
+	private int score;//a Score HAS-A counter for points
 	
 	/**
 	 * Purpose: constructor initializes score to 0

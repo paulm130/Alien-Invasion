@@ -129,6 +129,4 @@ class TestAlienInvasion
 		testPlayer.moveDown(800);
 		assertEquals(600, testPlayer.getYLocation());
 	}
-	
-	//more tests will be added soon
 }

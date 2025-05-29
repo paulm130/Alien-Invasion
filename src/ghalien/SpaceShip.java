@@ -19,33 +19,30 @@
 */
 package ghalien;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.awt.Graphics; //allow us to draw the ship so it is visible
+import java.awt.Image; //allow us to have a usable image to be drawn
+import java.awt.image.BufferedImage; //allow us to load image data into a variable
+import java.io.IOException; //allow us to handle Input OutPut exceptiosn since we are dealing with files
 
-import javax.imageio.ImageIO;
+import javax.imageio.ImageIO; //allow us to read image data
 
 /**
- * Purpose: The reponsibility of SpaceShip is ...
- *
- * SpaceShip is-a ...
- * SpaceShip is ...
+ * Purpose: The reponsibility of SpaceShip is to handle SpaceShip movement and be visible on screen
+ * SpaceShip IS Moveable
  */
 public class SpaceShip implements Moveable
 {
 	private int x; //SpaceShip HAS-A horizontal location
 	private int y; //SpaceShip HAS-A vertical location
 	private Image shipImage; //SpaceShip HAS-A image
-	private Image shotImage; //SpaceShip HAS-A(n) image for a shot
 	
 	/**
 	 * Purpose: constructor 
 	 */
 	public SpaceShip()
 	{
-		x = 100;
-		y = 100;
+		x = 100; //initial starting point for x coordinate
+		y = 100; //inital starting point for y coordinate
 	}
 	
 	public void drawSpaceShip(Graphics g)
@@ -53,12 +50,12 @@ public class SpaceShip implements Moveable
 		try
 		{
 			BufferedImage ship = ImageIO.read(getClass().getResource("spaceship.png")); //load image
-			shipImage = ship; //make image accessible globally
+			shipImage = ship; //set shipImage to address of ship variable because drawImage method only takes Image variables
 			g.drawImage(shipImage, getXLocation(), getYLocation(), 150, 150, null); //draw space ship image at specific location
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			e.printStackTrace(); //tell us what went wrong
 		}
 	}
 

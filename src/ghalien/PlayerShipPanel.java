@@ -22,30 +22,37 @@
 */
 package ghalien;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.awt.Image;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.awt.Color; //allow us to use different colors
+import java.awt.Graphics; //allow us to draw and repaint components on the JPanel
+import java.awt.Rectangle; //allow us to create Rectangles; we create "hit boxes" to register collisions and shots fired
+import java.awt.event.ActionEvent; //allow us to have an event that can be executed (related to our timer)
+import java.awt.event.ActionListener; //necessary in conjunction w/ ActionEvent so it ActionEvent will execute
+import java.awt.event.KeyEvent; //allow us to have an even executed if a certain key is used
+import java.awt.event.KeyListener; //necessary in conjunction w/ KeyEvent so KeyEvents actually occur
+import java.awt.event.MouseEvent; //allow us to have an event executed if mouse is used
+import java.awt.event.MouseListener; //necessary in conjunction w/ MouseEvent so events occur
+import java.awt.image.BufferedImage; //allow us to load in images
+import java.awt.Image; //allow us to use our loaded images with the draw method of the Graphics class
+import java.io.IOException; //allow us to handle InputOutput Exceptions if and when they occur
+import java.util.ArrayList; //allow us to store objects form our own custom classes
+import java.util.Random; //allow us to randomly generate numbers (necessary for randomizing ship movement)
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.imageio.ImageIO; //necessary in reading image file data
+import javax.swing.JPanel; //allow us to later add an instantiation of this class to our JFrame
+//also allows us to customize this section of our game
+import javax.swing.Timer; //allow us to execute ActionEvents at certain time periods
 
 /**
- * Purpose: The reponsibility of PlayerShipPanel is ...
- *
- * PlayerShipPanel is-a ...
- * PlayerShipPanel is ...
+ * Purpose: The reponsibility of PlayerShipPanel is to house all methods related to game such as:
+ * Customizing look of main game component (this panel)
+ * Paint components so space ships and the player are visible
+ * Allow the space ship and player to move and have that movement visible on screen
+ * Allow player to shoot and collide with ships
+ * 
+ * PlayerShipPanel IS-A JPanel
+ * PlayerShipPanel IS able to Listen to Actions (ActionListener) and then execute ActionEvents
+ * PlayerShipPanel IS able to listen to Keys (KeyListener) and then execute KeyEvents
+ * PlayerShipPanel IS able to listen to the Mouse (MouseListener) and then execute MouseEvents
  */
 public class PlayerShipPanel extends JPanel implements ActionListener, KeyListener, MouseListener
 {
@@ -65,8 +72,8 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	 */
 	public PlayerShipPanel(AlienInvasionView initAlienInvasionView)
 	{
-		setBackground(Color.DARK_GRAY);
-		this.alienInvasionView = initAlienInvasionView;
+		setBackground(Color.DARK_GRAY); //change background color
+		this.alienInvasionView = initAlienInvasionView; //have access to methods in AlienInvasionView
 		newPlayer = new Player(); //create player
 		spaceShips = new ArrayList<>(); //create array of spaceShips (allows us to have multiple ships)
 		spaceShips.add(new SpaceShip()); //create ship and add to array
@@ -91,25 +98,23 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	{
 		super.paintComponent(g);
 		newPlayer.drawPlayerImage(g); //draw player on screen
-		System.out.println(spaceShips.size());
 		if(shotStatus == 1)
 		{
 			try
 			{
-				BufferedImage shot = ImageIO.read(getClass().getResource("Shot.png"));
+				BufferedImage shot = ImageIO.read(getClass().getResource("Shot.png")); //load and read shot image data
 				shotImage = shot;
-				g.drawImage(shotImage, shipX, shipY, 150, 150,null);
-				System.out.println("work");
-				shotStatus = 0;
+				g.drawImage(shotImage, shipX, shipY, 150, 150,null); //draw shot image on screen so it's visible
+				shotStatus = 0; //reset shot status
 			}
 			catch (IOException e)
 			{
-				e.printStackTrace();
+				e.printStackTrace(); //tell us what went wrong
 			}
 		}
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
-			spaceShips.get(i).drawSpaceShip(g);
+			spaceShips.get(i).drawSpaceShip(g); //draw a ship so it is visible
 		}
 //			try
 //			{
@@ -186,7 +191,10 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void keyTyped(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the KeyListener and using the KeyEvents class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//it is not necessary in our game play
 		
 	}
 
@@ -222,7 +230,10 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the KeyListener and using the KeyEvents class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//it is not necessary in our game play
 		
 	}
 
@@ -252,28 +263,42 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the MouseListener and MouseEvent class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//we don't have/want anything happening when the mouth is "pressed" down for periods of time
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the MouseListener and MouseEvent class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//because we don't have anything happening when the mouse is pressed,
+		//we also don't have anything happening when the mouse is released!
+		//it is not relevant to our game
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the MouseListener class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//our game does not require something to happen if mouse is entered
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		// this method is empty!
+		//because we are implementing the MouseListener class this is a required method that we must have
+		//however we don't actually use this method in any of our code so it is empty :(
+		//our game does not have something happen if mouse is exited
 		
 	}
 	

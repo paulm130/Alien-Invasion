@@ -1,7 +1,7 @@
 /**
 * Lead Author(s):
 * @author Paul Montal; student ID
-* @author Full name; student ID
+* @author Grace Ho; student ID
 * <<Add additional lead authors here>>
 *
 * Other Contributors:
@@ -19,11 +19,11 @@
 */
 package ghalien;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.File; //Help us deal with our files
+import java.io.FileWriter; //Allow us to write to files
+import java.io.IOException; //Allow us to handle input output exceptions
+import java.io.PrintWriter; //Allow us to write things
+import java.util.ArrayList; //Allow us to store data as an ArrayList because we are storing objects of classes we created
 
 /**
  * Purpose: The reponsibility of Leaderboard is ...
@@ -41,7 +41,7 @@ public class Leaderboard
 	 */
 	public Leaderboard()
 	{
-		players = new ArrayList<>();
+		players = new ArrayList<>(); //create an ArrayList of players
 	}
 	
 	/**
@@ -60,8 +60,8 @@ public class Leaderboard
 	 */
 	public String toString(int i)
 	{
-		Player player = players.get(i);
-		return player.toString();
+		Player player = players.get(i); //retrieve certain player from ArrayList at index i
+		return player.toString(); //Player's name and score is returned as a String
 	}
 	
 	/**
@@ -72,22 +72,22 @@ public class Leaderboard
 		
 		try 
 		{
-			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true));
+			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true)); //allow us to write to our leader board file
+			//we are able to append the file and NOT wipe it because of "true"
 			
-			for(int i = 0; i < players.size(); i++)
+			for(int i = 0; i < players.size(); i++) //allows us to write info for all Players in the ArrayList
 			{
-				outputFileWriter.println(this.toString(i));
+				outputFileWriter.println(this.toString(i)); //write Player info on a new line each time
 			}
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			System.out.println("Cannot write file. File will not be written");
 			e.printStackTrace();
 		}	
 		finally
 		{
-			outputFileWriter.close();
+			outputFileWriter.close(); //always need to close our files!
 		}
 	}
 }

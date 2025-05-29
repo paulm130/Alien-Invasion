@@ -21,10 +21,7 @@ package ghalien;
 
 
 /**
- * Purpose: The reponsibility of Moveable is ...
- *
- * Moveable is-a ...
- * Moveable is ...
+ * Purpose: The reponsibility of Moveable is to outline the methods needed for anything that needs to move
  */
 public interface Moveable
 {
@@ -35,7 +32,7 @@ public interface Moveable
 	
 	/**
 	 * Purpose: move something to the right
-	 * @param panelWidth
+	 * @param panelWidth helps us know the wall of our panel
 	 */
 	void moveRight(int panelWidth);
 	
@@ -46,7 +43,7 @@ public interface Moveable
 	
 	/**
 	 * Purpose: move something down
-	 * @param panelHeight
+	 * @param panelHeight helps us know the wall of our panel
 	 */
 	void moveDown(int panelHeight);
 }

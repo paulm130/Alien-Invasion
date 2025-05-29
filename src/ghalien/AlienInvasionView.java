@@ -38,7 +38,6 @@ import javax.swing.JPanel; //allow us to make the JFrame neater and break it int
  */
 public class AlienInvasionView extends JFrame
 {
-	private AlienInvasionModel gameModel; //a AlienInvasionModel has-a gameModel
 	private Score score; //a AlienInvasionModel has-a score
 	private JLabel scoreLabel; //a AlienInvasionModel has-a scoreLabel
 	private PlayerShipPanel mainPanel; //a AlienInvasionView has-a mainPanel
@@ -59,7 +58,7 @@ public class AlienInvasionView extends JFrame
 				    JOptionPane.WARNING_MESSAGE);
 		}		
 		
-		leaderboard = new Leaderboard();
+		leaderboard = new Leaderboard(); //creating a leaderboard
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //will close when the "x" button in corner is clicked
 		setSize(800,800); //JFrame is 800 x 800 pixels
 		setResizable(false); //don't want people to resize the game! It will mess with how it looks :(
@@ -141,6 +140,6 @@ public class AlienInvasionView extends JFrame
 	 */
 	public static void main(String[] args)
 	{
-		new AlienInvasionView();
+		new AlienInvasionView(); //initiate class to run game
 	}
 }
