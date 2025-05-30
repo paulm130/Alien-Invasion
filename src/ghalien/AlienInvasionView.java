@@ -21,6 +21,7 @@
 package ghalien;
 
 import java.awt.BorderLayout; //help our game be organized!
+import java.awt.Color;
 import java.util.Scanner; //help us read input (for leaderboard)
 
 import javax.swing.JFrame; //able to create a JFrame & have access to JFrame methods
@@ -72,6 +73,7 @@ public class AlienInvasionView extends JFrame
 		//Instructions Panel
 		JPanel instructions = new JPanel(); //create panel
 		JLabel instructionLabel = new JLabel("Use arrow keys to move and click enemy ships to shoot");
+		instructionLabel.setForeground(Color.RED); //make instructions red
 		instructions.add(instructionLabel);
 		this.add(instructions, BorderLayout.WEST); //Instructions are visible on JFrame
 		
