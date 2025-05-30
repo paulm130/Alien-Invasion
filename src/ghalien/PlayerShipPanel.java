@@ -173,8 +173,15 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
-			if(player.intersects(spaceShip))
+			if(player.intersects(spaceShip)) try
+			{
 				alienInvasionView.updateGUI(2, newPlayer);
+			}
+			catch (InterruptedException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		//if there has been 30 actions(3 seconds) make a new spaceship
@@ -182,8 +189,15 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		{
 			spaceShips.add(new SpaceShip());
 			actionCounter = 0; //reset the actionCounter
-			if(spaceShips.size() >= 5)
+			if(spaceShips.size() >= 5) try
+			{
 				alienInvasionView.updateGUI(1, newPlayer);
+			}
+			catch (InterruptedException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -255,7 +269,14 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				shotStatus =  1;
 				spaceShips.remove(i);
 				repaint();
-				alienInvasionView.updateGUI(0, newPlayer); 
+				try
+				{
+					alienInvasionView.updateGUI(0, newPlayer);
+				}
+				catch (InterruptedException e1)
+				{
+					e1.printStackTrace();
+				} 
 			}
 		}
 	}

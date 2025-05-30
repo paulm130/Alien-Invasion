@@ -96,8 +96,9 @@ public class AlienInvasionView extends JFrame
 	 * Purpose: updates the score and checks if it is gameOver
 	 * @param updateType 0 means score update, 1 means lost due to too many aliens, 2 means lost due to collision with spaceShip
 	 * @param player the player that will be added to the leaderboard because it is gameOver
+	 * @throws InterruptedException 
 	 */
-	public void updateGUI(int updateType, Player player)
+	public void updateGUI(int updateType, Player player) throws InterruptedException
 	{
 		switch(updateType)
 		{
@@ -136,6 +137,7 @@ public class AlienInvasionView extends JFrame
 				break;
 		}
 	}
+
 	/**
 	 * Purpose: run the game!
 	 * @param args

@@ -31,6 +31,11 @@ public class Score
 		score = 0;
 	}
 	
+	public Score(int newScore)
+	{
+		score = newScore;
+	}
+	
 	/**
 	 * @return the value of score
 	 */
@@ -45,6 +50,11 @@ public class Score
 	public void updateScore()
 	{
 		score++;
+	}
+	
+	public void setScore(int givenScore)
+	{
+		score = givenScore;
 	}
 	
 	/**

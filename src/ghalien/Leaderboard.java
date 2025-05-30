@@ -20,10 +20,12 @@
 package ghalien;
 
 import java.io.File; //Help us deal with our files
+import java.io.FileNotFoundException;
 import java.io.FileWriter; //Allow us to write to files
 import java.io.IOException; //Allow us to handle input output exceptions
 import java.io.PrintWriter; //Allow us to write things
 import java.util.ArrayList; //Allow us to store data as an ArrayList because we are storing objects of classes we created
+import java.util.Scanner;
 
 /**
  * Purpose: The reponsibility of Leaderboard is ...
@@ -64,21 +66,90 @@ public class Leaderboard
 		return player.toString(); //Player's name and score is returned as a String
 	}
 	
+	public void readLeaderboard()
+	{
+		File leaderboardFile = new File("playerData.csv");
+		Scanner inputStream = null; 
+		try
+		{
+			inputStream = new Scanner(leaderboardFile);
+			inputStream.nextLine();
+			while(inputStream.hasNextLine())
+			{
+				String temp = inputStream.nextLine();
+				String [] tokens = temp.split(",");
+				String name = tokens[0];
+				String scoreString = tokens[1];
+				scoreString = scoreString.substring(scoreString.indexOf(" ")+1, scoreString.length());
+				int score = Integer.parseInt(scoreString);
+				Player newPlayer = new Player(name);
+				newPlayer.setScore(score);
+				players.add(newPlayer);
+			}
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(inputStream != null)
+			{
+				inputStream.close();
+//				sort();
+				for(int i = 0; i < players.size(); i++)
+				{
+					System.out.println(players.get(i).toString());
+				}
+			}
+		}
+		
+	}
+	
+	/**
+	 * Purpose: sort leaderboard
+	 */
+	public void sort()
+	{
+		for(int outter = players.size() - 1; outter > 0; outter--)
+		{
+			for(int inner = outter - 1; inner >= 0; inner--)
+			{
+				if(players.get(inner).getPlayerScore() < players.get(outter).getPlayerScore())
+				{
+					System.out.println("worked");
+					Player temp1 = new Player(players.get(inner));
+					Player temp2 = new Player(players.get(outter));
+					players.set(inner, temp2);
+					players.set(outter, temp1);
+					System.out.println("yes");
+				}
+				else
+				{
+					System.out.println("nope");
+				}
+			}
+		}
+		System.out.println("done!");
+	}
+	
 	/**
 	 * Purpose: writes the data from the Leaderboard to a .csv output file. Appends data onto whatever is already in leaderboard.
 	 */
 	public void outputLeaderboard()
 	{
-		
+		readLeaderboard();
+		sort();
 		try 
 		{
-			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true)); //allow us to write to our leader board file
+			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"))); //allow us to write to our leader board file
+			outputFileWriter.println("Name,Score");
 			//we are able to append the file and NOT wipe it because of "true"
-			
 			for(int i = 0; i < players.size(); i++) //allows us to write info for all Players in the ArrayList
 			{
 				outputFileWriter.println(this.toString(i)); //write Player info on a new line each time
 			}
+			//players.removeFirst();
 		}
 		catch (IOException e)
 		{

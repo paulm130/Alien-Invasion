@@ -65,6 +65,12 @@ public class Player implements Moveable
 		y = 600; //preset y coordinate
 	}
 	
+	public Player(Player copyPlayer)
+	{
+		name = copyPlayer.getName();
+		score = new Score(copyPlayer.getPlayerScore());
+	}
+	
 	/**
 	 * Purpose: sets the value of name
 	 * @param newName
@@ -154,13 +160,31 @@ public class Player implements Moveable
 	}
 	
 	/**
+	 * Purpose:
+	 * @return Score of player
+	 */
+	public int getPlayerScore()
+	{
+		return score.getScore();
+	}
+	
+	/**
+	 * Purpose
+	 * @return name of player
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
 	 * Purpose: returns the player data as a String. Only printing out the numerical value of the score not the word "score".
 	 * @return the player's name and score
 	 */
 	public String toString()
 	{
 		String scoreString = score.toString(); //get Score information in String format
-		String scoreSubstring = scoreString.substring(scoreString.indexOf(":")+1,scoreString.length()); //just get Score number from scoreString
+		String scoreSubstring = scoreString.substring((scoreString.indexOf(":")+2),scoreString.length());//just get Score number from scoreString
 		return name + "," + scoreSubstring; //combine name and Score number in one string
 	}
 	
@@ -170,5 +194,11 @@ public class Player implements Moveable
 	public void updateScore()
 	{
 		score.updateScore();
+	}
+	
+	public void setScore(int givenScore)
+	{
+		score = new Score();
+		score.setScore(givenScore);
 	}
 }
