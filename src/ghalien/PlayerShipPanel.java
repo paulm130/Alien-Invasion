@@ -18,7 +18,7 @@
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
 * https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html
 *
-* Version: 2025-05-25
+* Version: 2025-05-29
 */
 package ghalien;
 
@@ -163,6 +163,9 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 					case 3:
 						spaceShips.get(i).moveDown(getHeight());
 						break;
+					default:
+						System.out.println("Error cannot move SpaceShip " + i); //error message if can't move SpaceShip
+						break;
 				}
 				repaint(); //SpaceShip drawn in new location
 			}
@@ -222,6 +225,9 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 			case KeyEvent.VK_DOWN:
 				newPlayer.moveDown(getHeight());
 				break;	
+			default:
+				alienInvasionView.redInstructionLabel(); //if the player pushes the wrong key make the instruction label red so the player knows
+				break;
 		}
 		
 		repaint();
