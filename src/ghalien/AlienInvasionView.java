@@ -108,7 +108,7 @@ public class AlienInvasionView extends JFrame
 				player.updateScore();
 				player.setName(playerName);
 				
-				if(score.getScore() == 50)
+				if(score.getScore() == 10)
 				{
 					mainPanel.gameOver();
 					JOptionPane.showMessageDialog(null, "You saved Earth from the Aliens! You Win!");
