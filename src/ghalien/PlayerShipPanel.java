@@ -57,7 +57,7 @@ import javax.swing.Timer; //allow us to execute ActionEvents at certain time per
 public class PlayerShipPanel extends JPanel implements ActionListener, KeyListener, MouseListener
 {
 	private Timer timer; //a PlayerShipPanel has-a timer
-	private Player newPlayer; //a PlayerShipPanel has-a newPlayer
+	private Player player; //a PlayerShipPanel has-a player
 	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has-many spaceShips
 	private AlienInvasionView alienInvasionView; //a PlayerShipPanel has-a alienInvasionView
 	private int actionCounter; //a PlayerShipPanel has-a actionCounter
@@ -74,7 +74,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	{
 		setBackground(Color.DARK_GRAY); //change background color
 		this.alienInvasionView = initAlienInvasionView; //have access to methods in AlienInvasionView
-		newPlayer = new Player(); //create player
+		player = new Player(); //create player
 		spaceShips = new ArrayList<>(); //create array of spaceShips (allows us to have multiple ships)
 		spaceShips.add(new SpaceShip()); //create ship and add to array
 		
@@ -97,7 +97,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		newPlayer.drawPlayerImage(g); //draw player on screen
+		player.drawPlayerImage(g); //draw player on screen
 		if(shotStatus == 1)
 		{
 			try
@@ -172,12 +172,12 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		}
 		
 		//if the player and a SpaceShip collided will update the GUI with gameOver code
-		Rectangle player = new Rectangle(newPlayer.getXLocation(), newPlayer.getYLocation(), 150, 150);
+		Rectangle playerRectangle = new Rectangle(player.getXLocation(), player.getYLocation(), 150, 150);
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
-			if(player.intersects(spaceShip))
-				alienInvasionView.updateGUI(2, newPlayer);
+			if(playerRectangle.intersects(spaceShip))
+				alienInvasionView.updateGUI(2, player);
 		}
 		
 		//if there has been 30 actions(3 seconds) make a new spaceship
@@ -186,7 +186,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 			spaceShips.add(new SpaceShip());
 			actionCounter = 0; //reset the actionCounter
 			if(spaceShips.size() >= 5)
-				alienInvasionView.updateGUI(1, newPlayer);
+				alienInvasionView.updateGUI(1, player);
 		}
 	}
 	
@@ -214,16 +214,16 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		switch(keyCode)
 		{
 			case KeyEvent.VK_LEFT:
-				newPlayer.moveLeft();
+				player.moveLeft();
 				break;
 			case KeyEvent.VK_RIGHT:
-				newPlayer.moveRight(getWidth());
+				player.moveRight(getWidth());
 				break;
 			case KeyEvent.VK_UP:
-				newPlayer.moveUp();
+				player.moveUp();
 				break;
 			case KeyEvent.VK_DOWN:
-				newPlayer.moveDown(getHeight());
+				player.moveDown(getHeight());
 				break;	
 			default:
 				alienInvasionView.redInstructionLabel(); //if the player pushes the wrong key make the instruction label red so the player knows
@@ -261,7 +261,7 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				shotStatus =  1;
 				spaceShips.remove(i);
 				repaint();
-				alienInvasionView.updateGUI(0, newPlayer); 
+				alienInvasionView.updateGUI(0, player); 
 			}
 		}
 	}
