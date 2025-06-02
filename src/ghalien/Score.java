@@ -15,20 +15,20 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-04-27
+* Version: 2025-06-01
 */
 package ghalien;
 
 public class Score
 {
-	private int score;//a Score HAS-A counter for points
+	private int points;//a Score HAS-A counter for points
 	
 	/**
-	 * Purpose: constructor initializes score to 0
+	 * Purpose: constructor initializes points to 0
 	 */
 	public Score() 
 	{
-		score = 0;
+		points = 0;
 	}
 	
 	public Score(int newScore)
@@ -37,19 +37,19 @@ public class Score
 	}
 	
 	/**
-	 * @return the value of score
+	 * @return the value of points
 	 */
 	public int getScore()
 	{
-		return score;
+		return points;
 	}
 	
 	/**
-	 * Purpose: increments the score
+	 * Purpose: increments points
 	 */
 	public void updateScore()
 	{
-		score++;
+		points++;
 	}
 	
 	public void setScore(int givenScore)
@@ -58,10 +58,10 @@ public class Score
 	}
 	
 	/**
-	 * @return the value of score as a String
+	 * @return the value of points as a String
 	 */
 	public String toString()
 	{
-		return "Score: " + score;
+		return "Score: " + points;
 	}
 }

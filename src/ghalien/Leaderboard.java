@@ -15,7 +15,7 @@
 *
 * <<Add more references here>>
 *
-* Version: 2025-05-22
+* Version: 2025-06-01
 */
 package ghalien;
 
@@ -36,7 +36,6 @@ import java.util.Scanner;
 public class Leaderboard
 {
 	private ArrayList<Player> players; //a Leaderboard has players
-	private PrintWriter outputFileWriter; //a Leaderboard has-a outputFileWriter
 	
 	/**
 	 * Purpose: default constructor
@@ -137,14 +136,25 @@ public class Leaderboard
 	 * Purpose: writes the data from the Leaderboard to a .csv output file. Appends data onto whatever is already in leaderboard.
 	 */
 	public void outputLeaderboard()
+<<<<<<< HEAD
 	{
 		readLeaderboard();
 		sort();
 		try 
+=======
+	{	
+		//allow us to write to our leader board file
+		//we are able to append the file and NOT wipe it because of "true"
+		//using try-with-resources to make sure outputFileWriter is closed as soon as it is no longer needed.
+		try(PrintWriter outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true))) 
+>>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
 		{
+<<<<<<< HEAD
 			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"))); //allow us to write to our leader board file
 			outputFileWriter.println("Name,Score");
 			//we are able to append the file and NOT wipe it because of "true"
+=======
+>>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
 			for(int i = 0; i < players.size(); i++) //allows us to write info for all Players in the ArrayList
 			{
 				outputFileWriter.println(this.toString(i)); //write Player info on a new line each time
@@ -156,9 +166,5 @@ public class Leaderboard
 			System.out.println("Cannot write file. File will not be written");
 			e.printStackTrace();
 		}	
-		finally
-		{
-			outputFileWriter.close(); //always need to close our files!
-		}
 	}
 }
