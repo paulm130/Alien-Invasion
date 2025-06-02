@@ -18,7 +18,7 @@
 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html
 * https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html
 *
-* Version: 2025-05-29
+* Version: 2025-06-01
 */
 package ghalien;
 
@@ -61,8 +61,8 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 	private ArrayList<SpaceShip> spaceShips; //a PlayerShipPanel has-many spaceShips
 	private AlienInvasionView alienInvasionView; //a PlayerShipPanel has-a alienInvasionView
 	private int actionCounter; //a PlayerShipPanel has-a actionCounter
-	private int shipX = 0; //PlayerShipPanel has-a (records) the ship's x coordinate
-	private int shipY = 0; //PlayerShipPanel has-a (records) the ship's coordinate
+	private int shipX = 0; //PlayerShipPanel has-a (records) one ship's x coordinate
+	private int shipY = 0; //PlayerShipPanel has-a (records) one ship's y coordinate
 	private Image shotImage; //PlayerShipPanel has-a shot image
 	private int shotStatus = 0; //PlayerShipPanel has-a shotStatus
 	
@@ -82,6 +82,14 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		timer = new Timer(1000/10, this); //will move at 10 frames per second (not like usual 60)	
 		timer.start();
 		
+		//creating shot image
+		try {
+			BufferedImage shot = ImageIO.read(getClass().getResource("Shot.png")); // load and read shot image data
+		    shotImage = shot;
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
 		//setting up KeyListener
 		setFocusable(true); //if not focused, will not read key input
 		requestFocusInWindow();
@@ -100,17 +108,8 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		player.drawPlayerImage(g); //draw player on screen
 		if(shotStatus == 1)
 		{
-			try
-			{
-				BufferedImage shot = ImageIO.read(getClass().getResource("Shot.png")); //load and read shot image data
-				shotImage = shot;
-				g.drawImage(shotImage, shipX, shipY, 150, 150,null); //draw shot image on screen so it's visible
-				shotStatus = 0; //reset shot status
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace(); //tell us what went wrong
-			}
+			g.drawImage(shotImage, shipX, shipY, 150, 150,null); //draw shot image on screen so it's visible
+			shotStatus = 0; //reset shot status
 		}
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
