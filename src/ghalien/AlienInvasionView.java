@@ -136,9 +136,6 @@ public class AlienInvasionView extends JFrame
 				break;
 		}
 	}
-<<<<<<< HEAD
-
-=======
 	
 	/**
 	 * Purpose: sets the color of instructionLabel as red if the player pushes the wrong key
@@ -147,8 +144,7 @@ public class AlienInvasionView extends JFrame
 	{
 		instructionLabel.setForeground(Color.RED);
 	}
-	
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
+
 	/**
 	 * Purpose: run the game!
 	 * @param args

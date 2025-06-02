@@ -175,41 +175,35 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 		for(int i = 0; i < spaceShips.size(); i++)
 		{
 			Rectangle spaceShip = new Rectangle(spaceShips.get(i).getXLocation(), spaceShips.get(i).getYLocation(), 150, 150);
-<<<<<<< HEAD
-			if(player.intersects(spaceShip)) try
+			try
 			{
-				alienInvasionView.updateGUI(2, newPlayer);
+				if(playerRectangle.intersects(spaceShip))
+				{
+					alienInvasionView.updateGUI(2, player);
+				}
 			}
 			catch (InterruptedException e1)
 			{
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-=======
-			if(playerRectangle.intersects(spaceShip))
-				alienInvasionView.updateGUI(2, player);
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
 		}
 		
-		//if there has been 30 actions(3 seconds) make a new spaceship
+//		if there has been 30 actions(3 seconds) make a new spaceship
 		if(actionCounter == 30)
 		{
 			spaceShips.add(new SpaceShip());
 			actionCounter = 0; //reset the actionCounter
-<<<<<<< HEAD
-			if(spaceShips.size() >= 5) try
+			try
 			{
-				alienInvasionView.updateGUI(1, newPlayer);
+				if(spaceShips.size() >= 5)
+				{
+					alienInvasionView.updateGUI(1, player);
+				}
 			}
 			catch (InterruptedException e1)
 			{
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-=======
-			if(spaceShips.size() >= 5)
-				alienInvasionView.updateGUI(1, player);
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
 		}
 	}
 	
@@ -284,18 +278,15 @@ public class PlayerShipPanel extends JPanel implements ActionListener, KeyListen
 				shotStatus =  1;
 				spaceShips.remove(i);
 				repaint();
-<<<<<<< HEAD
+
 				try
 				{
-					alienInvasionView.updateGUI(0, newPlayer);
+					alienInvasionView.updateGUI(0, player);
 				}
 				catch (InterruptedException e1)
 				{
 					e1.printStackTrace();
-				} 
-=======
-				alienInvasionView.updateGUI(0, player); 
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
+				}  
 			}
 		}
 	}

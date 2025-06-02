@@ -33,7 +33,7 @@ public class Score
 	
 	public Score(int newScore)
 	{
-		score = newScore;
+		points = newScore;
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class Score
 	
 	public void setScore(int givenScore)
 	{
-		score = givenScore;
+		points = givenScore;
 	}
 	
 	/**

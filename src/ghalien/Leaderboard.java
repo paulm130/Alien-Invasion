@@ -78,9 +78,7 @@ public class Leaderboard
 				String temp = inputStream.nextLine();
 				String [] tokens = temp.split(",");
 				String name = tokens[0];
-				String scoreString = tokens[1];
-				scoreString = scoreString.substring(scoreString.indexOf(" ")+1, scoreString.length());
-				int score = Integer.parseInt(scoreString);
+				int score = Integer.parseInt(tokens[1]);
 				Player newPlayer = new Player(name);
 				newPlayer.setScore(score);
 				players.add(newPlayer);
@@ -95,11 +93,6 @@ public class Leaderboard
 			if(inputStream != null)
 			{
 				inputStream.close();
-//				sort();
-				for(int i = 0; i < players.size(); i++)
-				{
-					System.out.println(players.get(i).toString());
-				}
 			}
 		}
 		
@@ -116,45 +109,27 @@ public class Leaderboard
 			{
 				if(players.get(inner).getPlayerScore() < players.get(outter).getPlayerScore())
 				{
-					System.out.println("worked");
 					Player temp1 = new Player(players.get(inner));
 					Player temp2 = new Player(players.get(outter));
 					players.set(inner, temp2);
 					players.set(outter, temp1);
-					System.out.println("yes");
-				}
-				else
-				{
-					System.out.println("nope");
 				}
 			}
 		}
-		System.out.println("done!");
 	}
 	
 	/**
 	 * Purpose: writes the data from the Leaderboard to a .csv output file. Appends data onto whatever is already in leaderboard.
 	 */
 	public void outputLeaderboard()
-<<<<<<< HEAD
 	{
 		readLeaderboard();
 		sort();
-		try 
-=======
-	{	
 		//allow us to write to our leader board file
-		//we are able to append the file and NOT wipe it because of "true"
 		//using try-with-resources to make sure outputFileWriter is closed as soon as it is no longer needed.
-		try(PrintWriter outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"), true))) 
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
+		try(PrintWriter outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv")))) 
 		{
-<<<<<<< HEAD
-			outputFileWriter = new PrintWriter(new FileWriter(new File("playerData.csv"))); //allow us to write to our leader board file
 			outputFileWriter.println("Name,Score");
-			//we are able to append the file and NOT wipe it because of "true"
-=======
->>>>>>> branch 'main' of https://github.com/paulm130/Alien-Invasion.git
 			for(int i = 0; i < players.size(); i++) //allows us to write info for all Players in the ArrayList
 			{
 				outputFileWriter.println(this.toString(i)); //write Player info on a new line each time
