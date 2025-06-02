@@ -65,6 +65,10 @@ public class Leaderboard
 		return player.toString(); //Player's name and score is returned as a String
 	}
 	
+	/**
+	 * Purpose: read results in from playerData.csv to create Player objects to add to players ArrayList
+	 * Now players ArrayList has most recent player data and past player data
+	 */
 	public void readLeaderboard()
 	{
 		File leaderboardFile = new File("playerData.csv");
@@ -72,13 +76,14 @@ public class Leaderboard
 		try
 		{
 			inputStream = new Scanner(leaderboardFile);
-			inputStream.nextLine();
-			while(inputStream.hasNextLine())
+			inputStream.nextLine(); //skip first line because it is a header line
+			while(inputStream.hasNextLine()) //read each line
 			{
 				String temp = inputStream.nextLine();
-				String [] tokens = temp.split(",");
+				String [] tokens = temp.split(","); //break string where , is
 				String name = tokens[0];
 				int score = Integer.parseInt(tokens[1]);
+				//creating player to add to the ArrayList
 				Player newPlayer = new Player(name);
 				newPlayer.setScore(score);
 				players.add(newPlayer);
@@ -134,12 +139,11 @@ public class Leaderboard
 			{
 				outputFileWriter.println(this.toString(i)); //write Player info on a new line each time
 			}
-			//players.removeFirst();
 		}
 		catch (IOException e)
 		{
 			System.out.println("Cannot write file. File will not be written");
 			e.printStackTrace();
-		}	
+		}
 	}
 }

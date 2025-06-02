@@ -65,6 +65,10 @@ public class Player implements Moveable
 		y = 600; //preset y coordinate
 	}
 	
+	/**
+	 * Purpose: copy constructor for Player, create new Player based off copyPlayer's information
+	 * @param copyPlayer is the player we are copying
+	 */
 	public Player(Player copyPlayer)
 	{
 		name = copyPlayer.getName();
